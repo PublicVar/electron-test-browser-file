@@ -1,21 +1,16 @@
 "use strict";
 var fs = require("fs");
 var FileExplorer = (function () {
-    function FileExplorer() {
-        this.directories = {
-            "documents": "/home/nicolas/Documents",
-            "home": "/home/nicolas",
-            "downloads": "/home/nicolas/Téléchargements",
-            "applications": "/usr/local/bin"
-        };
+    function FileExplorer(directoriesHierarchy) {
+        this.directoriesHierarchy = directoriesHierarchy;
     }
     FileExplorer.prototype.load = function (el) {
         var _this = this;
         // extract the choice according to the name of the element. the form is nav-choice
-        var choice = el.getAttribute('id').split('-').length > 0 ? el.getAttribute('id').split('-')[1] : null;
-        var path = this.directories[choice] ? this.directories[choice] : null;
+        //let choice = el.getAttribute('id').split('-').length > 0 ? el.getAttribute('id').split('-')[1] : null;
+        var path = this.directoriesHierarchy.getPathFromName(el.getAttribute('id'));
         if (!path)
-            throw new Error("Error : directory not defined for " + choice);
+            throw new Error("Error : directory not defined for " + el.getAttribute('id'));
         fs.readdir(path, function (err, items) {
             if (err)
                 throw new Error("Erreur : " + err);

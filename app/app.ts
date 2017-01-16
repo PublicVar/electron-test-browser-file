@@ -1,8 +1,8 @@
 
 import  { FileExplorer }  from './Explorer/FileExplorer'
-
+import { DirectoriesHierarchy } from './Explorer/DirectoriesHierarchy';
+let fileExplorer = new FileExplorer( new DirectoriesHierarchy());
 let load = (el: Element) => {
-    let fileExplorer = new FileExplorer();
     fileExplorer.load(el);
 }
 

@@ -1,21 +1,20 @@
 import fs = require('fs');
+import {DirectoriesHierarchy} from './DirectoriesHierarchy';
 
 export class FileExplorer {
 
-    directories = {
-        "documents": "/home/nicolas/Documents",
-        "home": "/home/nicolas",
-        "downloads": "/home/nicolas/Téléchargements",
-        "applications": "/usr/local/bin"
+    
+
+    constructor(private directoriesHierarchy: DirectoriesHierarchy){
+
     }
-
-
     load(el: Element): void {
         // extract the choice according to the name of the element. the form is nav-choice
-        let choice = el.getAttribute('id').split('-').length > 0 ? el.getAttribute('id').split('-')[1] : null;
-        let path = this.directories[choice] ? this.directories[choice] : null
+        //let choice = el.getAttribute('id').split('-').length > 0 ? el.getAttribute('id').split('-')[1] : null;
+        let path = this.directoriesHierarchy.getPathFromName(el.getAttribute('id'));
 
-        if (!path) throw new Error("Error : directory not defined for " + choice)
+
+        if (!path) throw new Error("Error : directory not defined for " + el.getAttribute('id'))
 
         fs.readdir(path,  (err: Error, items: string[]) => {
             if (err)
