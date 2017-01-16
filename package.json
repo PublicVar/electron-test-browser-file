@@ -6,7 +6,10 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electron/electron-quick-start.git"
+  },
   "keywords": [
     "Electron",
     "quick",
@@ -17,7 +20,18 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "@types/node": "^7.0.0",
     "electron": "^1.4.1",
+    "electron-connect": "^0.6.1",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "typescript": "^2.1.5"
+  },
+  "bugs": {
+    "url": "https://github.com/electron/electron-quick-start/issues"
+  },
+  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "dependencies": {
     "electron-connect": "^0.6.1",
     "gulp": "^3.9.1",
     "gulp-plumber": "^1.1.0"
