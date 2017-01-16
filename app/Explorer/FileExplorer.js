@@ -11,6 +11,7 @@ var FileExplorer = (function () {
     }
     FileExplorer.prototype.load = function (el) {
         var _this = this;
+        // extract the choice according to the name of the element. the form is nav-choice
         var choice = el.getAttribute('id').split('-').length > 0 ? el.getAttribute('id').split('-')[1] : null;
         var path = this.directories[choice] ? this.directories[choice] : null;
         if (!path)
@@ -18,11 +19,13 @@ var FileExplorer = (function () {
         fs.readdir(path, function (err, items) {
             if (err)
                 throw new Error("Erreur : " + err);
+            //Set the clicked menu element to active         
             _this.removeMenuActive();
             _this.setCurrentMenuActive(el);
             var bodyContent = "";
             var dirIcon = '<span class="icon icon-folder"></span>';
             var fileIcon = '<span class="icon icon-doc"></span>';
+            //build the fileHierarchy
             for (var i = 0; i < items.length; i++) {
                 var stats = fs.statSync(path + "/" + items[i]);
                 var icon = stats.isDirectory() ? dirIcon : fileIcon;
